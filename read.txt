@@ -4,3 +4,19 @@ COM5 ESP WIFI MAC: 98:F4:AB:67:EA:D8 , BT MAC: 98:F4:AB:67:EA:DA -- Receive + BT
 
 31/3 TARGET -->>  PI -> multi-thead -> Foil battle logic
                   ESP -> Foil battle logic (Martin code) -> timeout esp now (200 ms)
+
+
+
+---------------------------ESP-----------------------------
+#define foil_button_pin     39
+#define foil_pin            5
+#define left_chest_pin      33
+#define right_chest_pin     33
+#define belly_pin           33
+#define back_pin            33
+
+#define PWM1_Ch             0
+#define PWM1_Res            8
+#define PWM1_DutyCycle      128
+#define PWM1_Freq           5000
+---------------------------ESP-----------------------------
