@@ -20,11 +20,12 @@
 #define PWM1_DutyCycle      128
 #define PWM1_Freq           5000
 
-const int threshold = 20;
-const int max_timeout = 50;
-int timeout = 0;
-
-bool send_flag = true;
+const int threshold =       20;
+const int max_timeout =     100; //timeout times for semder missing
+const int timer =           5; //delay time of every send 
+int timeout =               0;
+uint32_t last_time =        0;
+bool send_flag =            true;
 
 BluetoothSerial SerialBT; //BT_use
 bool bt_flag = false;
@@ -151,8 +152,11 @@ void loop() {
   
   detect();
   
-  if(bt_flag && send_flag) {
-    write_message_to_bt();
+  if(last_time < millis()){
+    last_time += timer;
+    if(bt_flag && send_flag) {
+      write_message_to_bt();
+    }
   }
-  delay(10);
+  //delay(10);
 }

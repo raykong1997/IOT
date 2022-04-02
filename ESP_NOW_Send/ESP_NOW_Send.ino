@@ -13,9 +13,10 @@
 #define PWM1_DutyCycle      128
 #define PWM1_Freq           5000
 
-const int threshold = 20;
-
-bool send_flag = true;
+const int threshold =       20;
+uint32_t last_time =        0;
+const int timer =           5; //delay time of every send 
+bool send_flag =            true;
 
 typedef struct struct_message { //Send massage
   bool foil;
@@ -110,10 +111,13 @@ void loop() {
   
   detect();
   
-  if (send_flag) { //Send_Data_ESP_NOW
-    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &state, sizeof(state));
-    }
+  if(last_time < millis()){
+    last_time += timer;
+    
+    if (send_flag) { //Send_Data_ESP_NOW
+      esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &state, sizeof(state));
+      }
   
-  
-  delay(10);  
+  }
+  //delay(10);  
   }
