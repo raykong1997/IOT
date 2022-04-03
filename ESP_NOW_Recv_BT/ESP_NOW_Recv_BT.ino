@@ -18,11 +18,11 @@
 #define PWM1_Ch             0
 #define PWM1_Res            8
 #define PWM1_DutyCycle      128
-#define PWM1_Freq           5000
+#define PWM1_Freq           3000
 
-const int threshold =       20;
-const int max_timeout =     100; //timeout times for semder missing
-const int timer =           5; //delay time of every send 
+const int threshold =       30;
+const int max_timeout =     10; //timeout times for semder missing
+const int timer =           10; //delay time of every send 
 int timeout =               0;
 uint32_t last_time =        0;
 bool send_flag =            true;
@@ -93,25 +93,25 @@ void detect(){
         this_state.foil_button = false;
       }
       
-  if(analogRead(left_chest_pin) > threshold){
+  if(analogRead(left_chest_pin) < threshold){
         this_state.left_chest = true;
       }else{
         this_state.left_chest = false;
       }
       
-  if(analogRead(right_chest_pin) > threshold){
+  if(analogRead(right_chest_pin) < threshold){
         this_state.right_chest = true;
       }else{
         this_state.right_chest = false;
       }
       
-  if(analogRead(belly_pin) > threshold){
+  if(analogRead(belly_pin) < threshold){
         this_state.belly = true;
       }else{
         this_state.belly = false;
       }
   
-  if(analogRead(back_pin) > threshold){
+  if(analogRead(back_pin) < threshold){
         this_state.back = true;
       }else{
         this_state.back = false;
