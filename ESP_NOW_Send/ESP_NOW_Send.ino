@@ -11,11 +11,11 @@
 #define PWM1_Ch             0
 #define PWM1_Res            8
 #define PWM1_DutyCycle      128
-#define PWM1_Freq           5000
+#define PWM1_Freq           3000
 
-const int threshold =       20;
+const int threshold =       30;
 uint32_t last_time =        0;
-const int timer =           5; //delay time of every send 
+const int timer =           10; //delay time of every send 
 bool send_flag =            true;
 
 typedef struct struct_message { //Send massage
@@ -50,25 +50,25 @@ void detect(){
         state.foil_button = false;
       }
       
-  if(analogRead(left_chest_pin) > threshold){
+  if(analogRead(left_chest_pin) < threshold){
         state.left_chest = true;
       }else{
         state.left_chest = false;
       }
       
-  if(analogRead(right_chest_pin) > threshold){
+  if(analogRead(right_chest_pin) < threshold){
         state.right_chest = true;
       }else{
         state.right_chest = false;
       }
       
-  if(analogRead(belly_pin) > threshold){
+  if(analogRead(belly_pin) < threshold){
         state.belly = true;
       }else{
         state.belly = false;
       }
   
-  if(analogRead(back_pin) > threshold){
+  if(analogRead(back_pin) < threshold){
         state.back = true;
       }else{
         state.back = false;
